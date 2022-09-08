@@ -26,6 +26,7 @@ public class TechJobs {
         actionChoices.put("list", "List");
 
         System.out.println("Welcome to LaunchCode's TechJobs App!");
+        System.out.println();
 
         // Allow the user to search until they manually quit
         while (true) {
@@ -44,7 +45,8 @@ public class TechJobs {
 
                     ArrayList<String> results = JobData.findAll(columnChoice);
 
-                    System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
+                    System.out.println();
+                    System.out.println("*** All " + columnChoices.get(columnChoice) + " Values ***");
 
                     // Print list of skills, employers, etc
                     for (String item : results) {
@@ -55,13 +57,17 @@ public class TechJobs {
             } else { // choice is "search"
 
                 // How does the user want to search (e.g. by skill or employer)
+                System.out.println();
                 String searchField = getUserSelection("Search by:", columnChoices);
 
                 // What is their search term?
-                System.out.println("\nSearch term:");
+                System.out.println();
+                System.out.println("Search term:");
+
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
+                    System.out.println();
                     printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
@@ -87,7 +93,7 @@ public class TechJobs {
 
         do {
 
-            System.out.println("\n" + menuHeader);
+            System.out.println(menuHeader);
 
             // Print available choices
             for (int j = 0; j < choiceKeys.length; j++) {
@@ -122,14 +128,19 @@ public class TechJobs {
 
         if (someJobs.size() == 0) {
             System.out.print("No Results");
+            System.out.println();
         } else {
             for (HashMap<String, String> job : someJobs) {
-                System.out.println("\n*****");
+                if (someJobs.size() == 1) {
+                    System.out.println();
+                }
+                System.out.println("*****");
 
                 for (Map.Entry<String, String> j : job.entrySet()) {
                     System.out.println(j.getKey() + ": " + j.getValue());
                 }
                 System.out.println("*****");
+                System.out.println();
             }
         }
     }
